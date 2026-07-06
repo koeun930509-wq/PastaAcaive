@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pasta Recipe 요약 | 파스타 아카이브</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#F6F2EA', surface: '#FFFFFF', surface2: '#EFEAE0', ink: '#1C1C1A',
+          inksub: '#7A776E', inkmute: '#A6A399', border: '#DEDACE', borders: '#C7C2B3',
+          accent: '#FFA23B', accentdark: '#8A5518', accentbg: '#FFEDD3',
+        },
+        fontFamily: { sans: ['Pretendard Variable', 'Pretendard', '-apple-system', 'sans-serif'] },
+      },
+    },
+  };
+</script>
+<style>
+  body { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif; }
+</style>
+</head>
+<body class="bg-bg text-ink">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-bg/95 backdrop-blur border-b border-border">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="shrink-0 flex items-center"><img src="assets/img/pastaAcaiveLogo_header.png" alt="Pasta Acaive" class="h-8 md:h-9 w-auto"></a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-inksub">
+        <a href="master-list.html" class="hover:text-accentdark transition-colors">Master Review</a>
+        <a href="user-list.html" class="hover:text-accentdark transition-colors">User Review</a>
+        <a href="summary.html" class="text-accentdark font-semibold">Pasta Recipe 요약</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 bg-surface2 border border-border rounded-full px-3 py-1.5 w-56">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-inkmute shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" placeholder="레시피 검색" class="bg-transparent text-sm outline-none w-full placeholder:text-inkmute">
+        </div>
+        <button class="md:hidden w-9 h-9 flex items-center justify-center text-ink" aria-label="메뉴">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 md:px-8 py-10 md:py-16">
+
+    <div class="flex items-center gap-2 mb-6 text-sm">
+      <a href="index.html" class="text-inksub hover:text-accentdark">&lt;</a>
+      <span class="font-medium text-inksub">Pasta Recipe 요약</span>
+    </div>
+
+    <div class="text-center mb-8">
+      <h1 class="text-2xl md:text-3xl font-extrabold mb-2">유튜브 링크 하나로<br>재료와 레시피를 한번에</h1>
+      <p class="text-sm text-inksub">파스타 레시피 영상 링크를 붙여넣으면 AI가 재료와 조리순서를 자동으로 정리해드려요.</p>
+    </div>
+
+    <label class="block text-sm font-bold mb-2">유튜브 링크</label>
+    <div class="flex gap-2 mb-8">
+      <input type="url" placeholder="링크를 붙여넣으세요" class="flex-1 border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent">
+      <button class="border border-ink rounded-lg px-5 text-sm font-semibold hover:bg-ink hover:text-white transition-colors shrink-0">요약하기</button>
+    </div>
+
+    <div class="bg-surface2 border border-border rounded-xl p-4 md:p-5 mb-6">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-xs text-inkmute font-medium">요약 결과</span>
+        <button class="flex items-center gap-1.5 text-xs text-inksub border border-borders rounded-lg px-3 py-1.5 bg-surface hover:bg-surface2 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          복사
+        </button>
+      </div>
+      <p class="text-sm font-bold mb-1.5">재료</p>
+      <p class="text-sm text-inksub mb-4 leading-relaxed">스파게티 · 마늘 · 토마토소스 · 올리브오일 · 파마산치즈 · 바질</p>
+      <p class="text-sm font-bold mb-1.5">레시피</p>
+      <p class="text-sm text-inksub leading-loose">
+        1. 끓는 물에 소금을 넣고 면을 삶는다.<br>
+        2. 팬에 올리브오일과 마늘을 볶는다.<br>
+        3. 토마토소스를 넣고 끓인다.<br>
+        4. 면과 소스를 섞고 치즈·바질로 마무리한다.
+      </p>
+    </div>
+
+    <button class="w-full bg-ink text-white font-semibold rounded-lg py-3.5 text-sm hover:bg-black transition-colors">이 요약으로 후기 작성하기</button>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-border mt-16">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <p class="font-extrabold mb-1">파스타<span class="text-accent">아카이브</span></p>
+        <p class="text-xs text-inkmute">파스타 레시피 요약과 실제 후기를 한곳에서. 자취생을 위한 리얼 아카이빙.</p>
+      </div>
+      <div class="flex gap-5 text-xs text-inksub">
+        <a href="master-list.html" class="hover:text-accentdark">Master Review</a>
+        <a href="user-list.html" class="hover:text-accentdark">User Review</a>
+        <a href="summary.html" class="hover:text-accentdark">Pasta Recipe 요약</a>
+      </div>
+      <p class="text-[11px] text-inkmute">&copy; 2026 파스타아카이브. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

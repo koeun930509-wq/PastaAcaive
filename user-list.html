@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Review | 파스타 아카이브</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#F6F2EA', surface: '#FFFFFF', surface2: '#EFEAE0', ink: '#1C1C1A',
+          inksub: '#7A776E', inkmute: '#A6A399', border: '#DEDACE', borders: '#C7C2B3',
+          accent: '#FFA23B', accentdark: '#8A5518', accentbg: '#FFEDD3',
+        },
+        fontFamily: { sans: ['Pretendard Variable', 'Pretendard', '-apple-system', 'sans-serif'] },
+      },
+    },
+  };
+</script>
+<style>
+  body { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+</head>
+<body class="bg-bg text-ink">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 bg-bg/95 backdrop-blur border-b border-border">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="shrink-0 flex items-center"><img src="assets/img/pastaAcaiveLogo_header.png" alt="Pasta Acaive" class="h-8 md:h-9 w-auto"></a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-inksub">
+        <a href="master-list.html" class="hover:text-accentdark transition-colors">Master Review</a>
+        <a href="user-list.html" class="text-accentdark font-semibold">User Review</a>
+        <a href="summary.html" class="hover:text-accentdark transition-colors">Pasta Recipe 요약</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 bg-surface2 border border-border rounded-full px-3 py-1.5 w-56">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-inkmute shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" placeholder="레시피 검색" class="bg-transparent text-sm outline-none w-full placeholder:text-inkmute">
+        </div>
+        <button class="md:hidden w-9 h-9 flex items-center justify-center text-ink" aria-label="메뉴">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-10">
+
+    <div class="flex items-center gap-2 mb-5 text-sm">
+      <a href="index.html" class="text-inksub hover:text-accentdark">&lt;</a>
+      <h1 class="font-bold text-lg">User Review</h1>
+    </div>
+
+    <!-- 카테고리 탭 -->
+    <div class="flex gap-2 overflow-x-auto no-scrollbar mb-6">
+      <button class="text-sm px-4 py-1.5 rounded-full border border-accent bg-accentbg text-accentdark font-medium whitespace-nowrap">전체</button>
+      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">토마토</button>
+      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">크림</button>
+      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">오일</button>
+      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">로제</button>
+      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">바질</button>
+      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">기타</button>
+    </div>
+
+    <!-- 카드 그리드 -->
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-5 mb-10">
+      <a href="user-detail.html" class="group">
+        <div class="relative rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=400&q=80" alt="알리오올리오" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+          <span class="absolute bottom-1.5 left-1.5 text-[9px] bg-surface/90 border border-border rounded-md px-1.5 py-0.5 text-inkmute">자동추출</span>
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">알리오올리오</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍝🍝</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=400&q=80" alt="크림 파스타" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">크림 파스타</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍽️🍝</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="relative rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1608219992759-8d74ed8d76eb?w=400&q=80" alt="오일 파스타" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+          <span class="absolute bottom-1.5 left-1.5 text-[9px] bg-surface/90 border border-border rounded-md px-1.5 py-0.5 text-inkmute">자동추출</span>
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">오일 파스타</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍝🍝🍝</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&q=80" alt="바질 파스타" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">바질 파스타</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍽️🍽️</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="relative rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1481931098730-318b6f776db0?w=400&q=80" alt="로제 파스타" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+          <span class="absolute bottom-1.5 left-1.5 text-[9px] bg-surface/90 border border-border rounded-md px-1.5 py-0.5 text-inkmute">자동추출</span>
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">로제 파스타</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍝🍝</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1633436375964-33b563bb6798?w=400&q=80" alt="기타 파스타" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">기타 파스타</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍽️🍝</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="relative rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1612874742237-6526221588e3?w=400&q=80" alt="까르보나라" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+          <span class="absolute bottom-1.5 left-1.5 text-[9px] bg-surface/90 border border-border rounded-md px-1.5 py-0.5 text-inkmute">자동추출</span>
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">까르보나라</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍽️🍽️</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1595295333158-4742f28fbd85?w=400&q=80" alt="봉골레" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">봉골레</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍝🍝</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="relative rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=400&q=80" alt="투움바" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+          <span class="absolute bottom-1.5 left-1.5 text-[9px] bg-surface/90 border border-border rounded-md px-1.5 py-0.5 text-inkmute">자동추출</span>
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">투움바</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍽️🍝</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=400&q=80" alt="명란 파스타" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">명란 파스타</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍽️🍝</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&q=80" alt="토마토 파스타" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">토마토 파스타</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍽️🍽️</p>
+      </a>
+      <a href="user-detail.html" class="group">
+        <div class="relative rounded-xl overflow-hidden border border-border mb-1.5">
+          <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=400&q=80" alt="갈릭크림 파스타" class="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300">
+          <span class="absolute bottom-1.5 left-1.5 text-[9px] bg-surface/90 border border-border rounded-md px-1.5 py-0.5 text-inkmute">자동추출</span>
+        </div>
+        <p class="text-xs md:text-sm font-medium truncate">갈릭크림 파스타</p>
+        <p class="text-accentdark text-[11px] md:text-xs tracking-widest mt-0.5">🍽️🍽️🍽️🍝🍝</p>
+      </a>
+    </div>
+  </main>
+
+  <!-- FAB -->
+  <a href="user-write.html" class="fixed bottom-6 right-6 md:bottom-10 md:right-10 w-14 h-14 rounded-full bg-accent text-white flex items-center justify-center text-2xl shadow-lg hover:brightness-95 transition" aria-label="후기 작성">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+  </a>
+
+  <!-- Footer -->
+  <footer class="border-t border-border mt-8">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <p class="font-extrabold mb-1">파스타<span class="text-accent">아카이브</span></p>
+        <p class="text-xs text-inkmute">파스타 레시피 요약과 실제 후기를 한곳에서. 자취생을 위한 리얼 아카이빙.</p>
+      </div>
+      <div class="flex gap-5 text-xs text-inksub">
+        <a href="master-list.html" class="hover:text-accentdark">Master Review</a>
+        <a href="user-list.html" class="hover:text-accentdark">User Review</a>
+        <a href="summary.html" class="hover:text-accentdark">Pasta Recipe 요약</a>
+      </div>
+      <p class="text-[11px] text-inkmute">&copy; 2026 파스타아카이브. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파스타 레시피 아카이빙 - 반응형 와이어프레임</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root {
+    --bg: #F6F2EA;
+    --surface: #FFFFFF;
+    --surface-2: #EFEAE0;
+    --text: #1C1C1A;
+    --text-secondary: #7A776E;
+    --text-muted: #A6A399;
+    --border: #DEDACE;
+    --border-strong: #C7C2B3;
+    --accent: #FFA23B;
+    --accent-dark: #8A5518;
+    --accent-bg: #FFEDD3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .intro {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 8px;
+  }
+  .intro h1 { font-size: 22px; font-weight: 700; margin: 0 0 6px; }
+  .intro p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+
+  nav.wf-nav {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  nav.wf-nav a {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 16px;
+    border: 1px solid var(--border-strong);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  nav.wf-nav a:hover { background: var(--accent-bg); color: var(--accent-dark); border-color: var(--accent); }
+
+  section.screen {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  section.screen h2 { font-size: 15px; font-weight: 700; margin: 0 0 2px; }
+  section.screen .path { font-size: 12px; color: var(--text-muted); font-family: monospace; margin: 0 0 20px; }
+
+  .frame {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* --- 공통 컴포넌트 --- */
+  .ph-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 4px; margin-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .logo { font-size: 14px; font-weight: 700; }
+  .icon-row { display: flex; gap: 14px; color: var(--text-secondary); font-size: 15px; }
+  .nav-links { display: none; }
+  .back-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; font-size: 13px; font-weight: 500; }
+  .back-row span.arrow { color: var(--text-secondary); }
+  .detail-title { font-size: 20px; font-weight: 700; margin: 0 0 8px; }
+  .detail-category {
+    font-size: 11px; color: var(--accent-dark); background: var(--accent-bg);
+    padding: 3px 10px; border-radius: 12px; display: inline-block; margin-bottom: 16px;
+  }
+  .detail-title-row {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;
+  }
+  .detail-title-row .detail-title { margin: 0; }
+  .detail-title-row .detail-category { margin: 0; flex-shrink: 0; }
+
+  .hero-box {
+    background: var(--surface-2); border: 1px dashed var(--border-strong); border-radius: 12px;
+    height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; margin-bottom: 14px;
+  }
+  .hero-box .dots { font-size: 10px; color: var(--text-muted); }
+  .cta-btn {
+    border: 1px solid var(--text); border-radius: 8px; padding: 8px 16px; font-size: 12px; background: transparent; color: var(--text); cursor: pointer;
+  }
+  .cta-btn.primary { background: var(--text); color: var(--surface); border: none; }
+
+  .section-label { display: flex; justify-content: space-between; align-items: center; margin: 0 0 8px; }
+  .section-label span.title { font-size: 13px; font-weight: 700; }
+  .section-label span.more { font-size: 11px; color: var(--text-muted); }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
+
+  .peek-wrap { position: relative; margin-bottom: 20px; }
+  .peek-row {
+    display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
+    -ms-overflow-style: none; scrollbar-width: none;
+  }
+  .peek-row::-webkit-scrollbar { display: none; }
+  .peek-row .card-item { flex: 0 0 38%; scroll-snap-align: start; }
+  .peek-arrow {
+    position: absolute; right: 2px; top: 32%; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--surface); border: 1px solid var(--border-strong); color: var(--text-secondary);
+    display: flex; align-items: center; justify-content: center; font-size: 13px;
+  }
+
+  .today-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
+  .today-card {
+    display: flex; gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  }
+  .today-card .today-img { flex: 0 0 42%; background: var(--surface-2); aspect-ratio: 4/3; }
+  .today-card .today-info { flex: 1; padding: 14px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .today-card .today-title { font-size: 15px; font-weight: 700; margin: 0; }
+  .today-card .today-meta { display: flex; gap: 6px; }
+  .today-card .today-meta span { font-size: 10px; padding: 3px 8px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-secondary); }
+  .today-card .today-rating { font-size: 14px; color: var(--accent-dark); letter-spacing: 2px; margin: 0; }
+
+  .card-img { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; aspect-ratio: 4/3; margin-bottom: 4px; position: relative; }
+  .card-title { font-size: 12px; margin: 0; }
+  .card-rating { font-size: 11px; color: var(--accent-dark); letter-spacing: 1px; margin: 2px 0 0; }
+  .card-meta { display: flex; gap: 4px; margin: 4px 0 2px; }
+  .card-meta span { font-size: 9px; padding: 2px 6px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-secondary); }
+  .badge-auto {
+    position: absolute; bottom: 4px; left: 4px; font-size: 9px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; color: var(--text-muted);
+  }
+
+  .tab-row { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 14px; }
+  .tab { font-size: 12px; padding: 6px 14px; border-radius: 16px; border: 1px solid var(--border-strong); white-space: nowrap; color: var(--text-secondary); }
+  .tab.active { background: var(--accent-bg); color: var(--accent-dark); border-color: var(--accent); font-weight: 500; }
+
+  .view-toggle { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 10px; color: var(--text-secondary); font-size: 15px; }
+  .fab { width: 42px; height: 42px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-left: auto; }
+
+  .detail-media { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; color: var(--text-muted); font-size: 12px; }
+  .link-chip { display: flex; align-items: center; gap: 6px; border: 1px solid var(--border-strong); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; font-size: 12px; color: var(--text-secondary); }
+  .tag-row { display: flex; gap: 6px; margin-bottom: 14px; }
+  .tag { font-size: 11px; padding: 4px 10px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); }
+  .block { font-size: 12px; margin: 0 0 6px; font-weight: 700; }
+  .block-body { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px; font-size: 12px; color: var(--text-secondary); line-height: 1.9; margin-bottom: 14px; }
+  .ai-badge { font-size: 9px; background: var(--accent-bg); color: var(--accent-dark); border-radius: 6px; padding: 1px 6px; margin-left: 6px; }
+  .review-box { border-top: 1px solid var(--border); padding-top: 10px; }
+  .review-box p.text { font-size: 12px; color: var(--text-secondary); margin: 0 0 6px; }
+  .stars { font-size: 16px; letter-spacing: 3px; color: var(--accent-dark); margin: 0; }
+
+  .comment-section { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 12px; }
+  .comment-section .block { margin-bottom: 10px; }
+  .comment-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 12px; }
+  .comment-left { display: flex; gap: 8px; }
+  .comment-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); flex-shrink: 0; }
+  .comment-body { font-size: 12px; }
+  .comment-name { font-weight: 700; margin: 0 0 2px; }
+  .comment-text { color: var(--text-secondary); margin: 0; }
+  .comment-delete { font-size: 11px; color: var(--text-muted); cursor: pointer; flex-shrink: 0; }
+  .comment-input-row { display: flex; gap: 6px; margin-top: 8px; }
+  .comment-input-row input { flex: 1; margin-bottom: 0; }
+  .comment-input-row button { border: 1px solid var(--text); border-radius: 8px; padding: 0 14px; font-size: 12px; background: transparent; white-space: nowrap; cursor: pointer; }
+
+  label.f-label { font-size: 12px; color: var(--text-secondary); display: block; margin: 0 0 5px; }
+  input.f-input, select.f-input, textarea.f-input {
+    width: 100%; border: 1px solid var(--border-strong); border-radius: 8px; padding: 9px 10px; font-size: 12px;
+    font-family: inherit; margin-bottom: 12px; background: var(--surface); color: var(--text);
+  }
+  textarea.f-input { resize: none; }
+  .upload-box {
+    background: var(--surface-2); border: 1px dashed var(--border-strong); border-radius: 10px; aspect-ratio: 4/3;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; margin-bottom: 12px; color: var(--text-muted); font-size: 11px;
+  }
+  .hint-box { background: var(--accent-bg); color: var(--accent-dark); border-radius: 8px; padding: 10px; font-size: 11px; margin-bottom: 12px; line-height: 1.7; }
+  .submit-btn { width: 100%; background: var(--text); color: var(--surface); border: none; border-radius: 8px; padding: 12px; font-size: 13px; font-weight: 500; cursor: pointer; }
+  .two-col { display: flex; flex-direction: column; gap: 20px; }
+  .form-row { display: flex; gap: 8px; margin-bottom: 12px; }
+  .form-row .f-input { margin-bottom: 0; }
+  .search-input-row { display: flex; gap: 8px; margin-bottom: 16px; }
+  .search-input-row input { flex: 1; }
+  .search-btn { border: 1px solid var(--text); border-radius: 8px; padding: 0 16px; font-size: 12px; background: transparent; white-space: nowrap; cursor: pointer; }
+
+  .result-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .result-header span.label { font-size: 11px; color: var(--text-muted); }
+  .copy-btn {
+    display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-secondary);
+    border: 1px solid var(--border-strong); border-radius: 8px; padding: 4px 10px; background: var(--surface); cursor: pointer;
+  }
+  .copy-btn:hover { background: var(--surface-2); }
+  .copy-btn.copied { color: var(--accent-dark); border-color: var(--accent); }
+
+  .footer-box { text-align: center; padding-top: 12px; border-top: 1px solid var(--border); font-size: 10px; color: var(--text-muted); }
+
+  /* --- PC 반응형 (768px 이상) --- */
+  @media (min-width: 768px) {
+    .frame { max-width: 100%; }
+    .ph-header { padding: 14px 20px; }
+    .nav-links { display: flex; gap: 28px; font-size: 13px; color: var(--text-secondary); }
+    .icon-row.mobile-only { display: none; }
+    .back-row.mobile-only-back { display: none; }
+
+    .hero-box { height: 200px; }
+    .today-grid { grid-template-columns: 1fr 1fr; }
+    .grid-2 { grid-template-columns: repeat(5, 1fr); }
+    .peek-row { overflow-x: visible; display: grid; grid-template-columns: repeat(5, 1fr); }
+    .peek-row .card-item { flex: auto; }
+    .peek-arrow { display: none; }
+    .grid-3 { grid-template-columns: repeat(6, 1fr); }
+
+    .tab-row { overflow-x: visible; }
+
+    .two-col { flex-direction: row; }
+    .two-col > .col { flex: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>파스타 레시피 아카이빙 — 반응형 와이어프레임</h1>
+  <p>브라우저 창 너비를 조절해 보세요 (768px 기준으로 모바일 ↔ PC 레이아웃이 전환됩니다). 회색 박스는 실제 이미지/사진이 들어갈 자리입니다.</p>
+</div>
+
+<nav class="wf-nav">
+  <a href="#main">① 메인</a>
+  <a href="#master-list">② Master 목록</a>
+  <a href="#master-detail">③ Master 상세</a>
+  <a href="#master-write">④ Master 작성</a>
+  <a href="#user-list">⑤ User 목록</a>
+  <a href="#user-detail">⑥ User 상세</a>
+  <a href="#user-write">⑦ User 작성</a>
+  <a href="#summary">⑧ 요약 도구</a>
+</nav>
+
+<!-- ① 메인 페이지 -->
+<section class="screen" id="main">
+  <h2>① 메인 페이지</h2>
+  <p class="path">/</p>
+  <div class="frame">
+    <div class="ph-header">
+      <span class="logo">로고</span>
+      <div class="nav-links">
+        <span>Master Review</span><span>User Review</span><span>Pasta Recipe 요약</span>
+      </div>
+      <div class="icon-row"><span>🔍</span><span class="mobile-only">☰</span></div>
+    </div>
+    <div class="hero-box">
+      <span style="font-size:12px;color:var(--text-secondary);">Hero 이미지 스와이프 (3장)</span>
+      <span class="dots">● ○ ○</span>
+      <button class="cta-btn">파스타 레시피 정리 요약</button>
+    </div>
+    <div class="section-label"><span class="title">오늘의 파스타 레시피</span></div>
+    <div class="today-grid">
+      <div class="today-card">
+        <div class="today-img"></div>
+        <div class="today-info">
+          <p class="today-title">토마토 스파게티</p>
+          <div class="today-meta"><span>쉬움</span><span>15분</span></div>
+          <p class="today-rating">★★★★☆</p>
+        </div>
+      </div>
+      <div class="today-card">
+        <div class="today-img"></div>
+        <div class="today-info">
+          <p class="today-title">알리오올리오</p>
+          <div class="today-meta"><span>쉬움</span><span>10분</span></div>
+          <p class="today-rating">★★★★★</p>
+        </div>
+      </div>
+    </div>
+    <div class="section-label"><span class="title">Master 추천 레시피</span><span class="more">더보기 &gt;</span></div>
+    <div class="peek-wrap">
+      <div class="peek-row">
+        <div class="card-item"><div class="card-img"></div><p class="card-title">토마토 파스타</p></div>
+        <div class="card-item"><div class="card-img"></div><p class="card-title">크림 파스타</p></div>
+        <div class="card-item"><div class="card-img"></div><p class="card-title">오일 파스타</p></div>
+        <div class="card-item"><div class="card-img"></div><p class="card-title">로제 파스타</p></div>
+        <div class="card-item"><div class="card-img"></div><p class="card-title">바질 파스타</p></div>
+      </div>
+      <button class="peek-arrow" aria-label="다음">›</button>
+    </div>
+    <div class="section-label"><span class="title">User 레시피</span><span class="more">더보기 &gt;</span></div>
+    <div class="peek-wrap">
+      <div class="peek-row">
+        <div class="card-item"><div class="card-img"></div><p class="card-title">알리오올리오</p></div>
+        <div class="card-item"><div class="card-img"></div><p class="card-title">까르보나라</p></div>
+        <div class="card-item"><div class="card-img"></div><p class="card-title">명란 파스타</p></div>
+        <div class="card-item"><div class="card-img"></div><p class="card-title">봉골레</p></div>
+        <div class="card-item"><div class="card-img"></div><p class="card-title">투움바</p></div>
+      </div>
+      <button class="peek-arrow" aria-label="다음">›</button>
+    </div>
+    <div class="footer-box">Footer · 서비스 정보</div>
+  </div>
+</section>
+
+<!-- ② Master Review 목록 -->
+<section class="screen" id="master-list">
+  <h2>② Master Review 목록</h2>
+  <p class="path">/master</p>
+  <div class="frame">
+    <div class="back-row"><span class="arrow">&lt;</span> Master Review</div>
+    <div class="tab-row">
+      <span class="tab active">토마토</span>
+      <span class="tab">크림</span>
+      <span class="tab">오일</span>
+      <span class="tab">로제</span>
+      <span class="tab">바질</span>
+      <span class="tab">기타</span>
+    </div>
+    <div class="view-toggle"><span>▦</span><span>☰</span></div>
+    <div class="grid-3">
+      <div><div class="card-img"></div><p class="card-title">토마토 파스타</p><p class="card-rating">★★★★☆</p></div>
+      <div><div class="card-img"></div><p class="card-title">크림 파스타</p><p class="card-rating">★★★☆☆</p></div>
+      <div><div class="card-img"></div><p class="card-title">오일 파스타</p><p class="card-rating">★★★★★</p></div>
+      <div><div class="card-img"></div><p class="card-title">로제 파스타</p><p class="card-rating">★★☆☆☆</p></div>
+      <div><div class="card-img"></div><p class="card-title">바질 파스타</p><p class="card-rating">★★★★☆</p></div>
+      <div><div class="card-img"></div><p class="card-title">기타 파스타</p><p class="card-rating">★★★☆☆</p></div>
+    </div>
+    <div class="fab">+</div>
+  </div>
+</section>
+
+<!-- ③ Master Review 상세 -->
+<section class="screen" id="master-detail">
+  <h2>③ Master Review 상세</h2>
+  <p class="path">/master/[id]</p>
+  <div class="frame">
+    <div class="back-row"><span class="arrow">&lt;</span> 레시피 상세</div>
+    <div class="detail-title-row">
+      <h3 class="detail-title">토마토 스파게티</h3>
+      <span class="detail-category">#토마토</span>
+    </div>
+    <div class="two-col">
+      <div class="col">
+        <div class="detail-media">결과물 사진 (4:3)</div>
+        <div class="link-chip">🔗 원본 영상 링크</div>
+      </div>
+      <div class="col">
+        <div class="tag-row"><span class="tag">쉬움</span><span class="tag">15분</span></div>
+        <p class="block">재료</p>
+        <div class="block-body">스파게티 · 마늘 · 토마토소스 · 올리브오일 · 파마산치즈</div>
+        <p class="block">레시피</p>
+        <div class="block-body">1. 면 삶기<br>2. 마늘 볶기<br>3. 소스 끓이기<br>4. 면과 소스 섞기</div>
+        <div class="review-box">
+          <p class="text">"생각보다 훨씬 간단하고 맛있었어요"</p>
+          <p class="stars">★★★★☆</p>
+        </div>
+        <div class="comment-section">
+          <p class="block">한줄의견 (2) <span style="font-size:10px;color:var(--text-muted);font-weight:400;">· 관리자 로그인 시 삭제 가능</span></p>
+          <div class="comment-item">
+            <div class="comment-left">
+              <div class="comment-avatar"></div>
+              <div class="comment-body">
+                <p class="comment-name">자취요리사</p>
+                <p class="comment-text">저도 어제 만들어봤는데 진짜 간단해요!</p>
+              </div>
+            </div>
+            <span class="comment-delete">삭제</span>
+          </div>
+          <div class="comment-item">
+            <div class="comment-left">
+              <div class="comment-avatar"></div>
+              <div class="comment-body">
+                <p class="comment-name">면치기왕</p>
+                <p class="comment-text">치즈 더 넣으면 더 맛있을 것 같아요</p>
+              </div>
+            </div>
+            <span class="comment-delete">삭제</span>
+          </div>
+          <div class="comment-input-row">
+            <input class="f-input" placeholder="닉네임">
+            <input class="f-input" placeholder="의견을 남겨보세요" style="flex:2;">
+            <button>등록</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ Master Review 작성 -->
+<section class="screen" id="master-write">
+  <h2>④ Master Review 작성</h2>
+  <p class="path">/master/new</p>
+  <div class="frame">
+    <div class="back-row"><span class="arrow">&lt;</span> 레시피 등록</div>
+    <div class="two-col">
+      <div class="col">
+        <label class="f-label">결과물 사진</label>
+        <div class="upload-box">📷 업로드 시 4:3 자동 크롭</div>
+        <div class="form-row">
+          <select class="f-input"><option>난이도</option></select>
+          <input class="f-input" placeholder="조리시간">
+        </div>
+      </div>
+      <div class="col">
+        <label class="f-label">영상 링크</label>
+        <input class="f-input" placeholder="유튜브 링크 붙여넣기">
+        <label class="f-label">재료 (자동 생성)</label>
+        <div class="block-body">스파게티 · 마늘 · 토마토소스 ...</div>
+        <label class="f-label">레시피 (자동 생성)</label>
+        <div class="block-body">1. 면 삶기 2. 마늘 볶기 ...</div>
+        <label class="f-label">한 줄 후기</label>
+        <textarea class="f-input" style="height:60px;" placeholder="어땠는지 적어주세요"></textarea>
+        <label class="f-label">별점 선택</label>
+        <p class="stars" style="color:var(--text-muted); margin-bottom:14px;">☆ ☆ ☆ ☆ ☆</p>
+        <button class="submit-btn">등록하기</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ User Review 목록 -->
+<section class="screen" id="user-list">
+  <h2>⑤ User Review 목록</h2>
+  <p class="path">/user</p>
+  <div class="frame">
+    <div class="back-row"><span class="arrow">&lt;</span> User Review</div>
+    <div class="tab-row">
+      <span class="tab active">전체</span>
+      <span class="tab">토마토</span>
+      <span class="tab">크림</span>
+      <span class="tab">오일</span>
+      <span class="tab">로제</span>
+      <span class="tab">바질</span>
+      <span class="tab">기타</span>
+    </div>
+    <div class="grid-3">
+      <div><div class="card-img"><span class="badge-auto">자동추출</span></div><p class="card-title">토마토 파스타</p><p class="card-rating">★★★☆☆</p></div>
+      <div><div class="card-img"></div><p class="card-title">크림 파스타</p><p class="card-rating">★★★★☆</p></div>
+      <div><div class="card-img"><span class="badge-auto">자동추출</span></div><p class="card-title">오일 파스타</p><p class="card-rating">★★☆☆☆</p></div>
+      <div><div class="card-img"></div><p class="card-title">바질 파스타</p><p class="card-rating">★★★★★</p></div>
+      <div><div class="card-img"><span class="badge-auto">자동추출</span></div><p class="card-title">로제 파스타</p><p class="card-rating">★★★☆☆</p></div>
+      <div><div class="card-img"></div><p class="card-title">기타 파스타</p><p class="card-rating">★★★★☆</p></div>
+    </div>
+    <div class="fab">+</div>
+  </div>
+</section>
+
+<!-- ⑥ User Review 상세 -->
+<section class="screen" id="user-detail">
+  <h2>⑥ User Review 상세</h2>
+  <p class="path">/user/[id]</p>
+  <div class="frame">
+    <div class="back-row"><span class="arrow">&lt;</span> 후기 상세</div>
+    <div class="detail-title-row">
+      <h3 class="detail-title">크림 파스타</h3>
+      <span class="detail-category">#크림</span>
+    </div>
+    <div class="two-col">
+      <div class="col">
+        <div class="detail-media">썸네일 (링크에서 자동 추출)</div>
+        <div class="link-chip">🔗 원본 영상 링크 (선택)</div>
+      </div>
+      <div class="col">
+        <p class="block">재료 <span class="ai-badge">AI 자동 요약</span></p>
+        <div class="block-body">스파게티 · 베이컨 · 크림 · 양파</div>
+        <p class="block">레시피</p>
+        <div class="block-body">1. 베이컨 볶기<br>2. 크림 붓기<br>3. 면 넣기<br>4. 마무리 간</div>
+        <div class="review-box">
+          <p class="text">"자취생 필수 메뉴네요"</p>
+          <p class="stars">★★★★☆</p>
+        </div>
+        <div class="comment-section">
+          <p class="block">한줄의견 (1) <span style="font-size:10px;color:var(--text-muted);font-weight:400;">· 관리자 로그인 시 삭제 가능</span></p>
+          <div class="comment-item">
+            <div class="comment-left">
+              <div class="comment-avatar"></div>
+              <div class="comment-body">
+                <p class="comment-name">파스타초보</p>
+                <p class="comment-text">베이컨 대신 스팸 넣어도 맛있을까요?</p>
+              </div>
+            </div>
+            <span class="comment-delete">삭제</span>
+          </div>
+          <div class="comment-input-row">
+            <input class="f-input" placeholder="닉네임">
+            <input class="f-input" placeholder="의견을 남겨보세요" style="flex:2;">
+            <button>등록</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ User Review 작성 -->
+<section class="screen" id="user-write">
+  <h2>⑦ User Review 작성</h2>
+  <p class="path">/user/new</p>
+  <div class="frame">
+    <div class="back-row"><span class="arrow">&lt;</span> 후기 작성</div>
+    <div class="two-col">
+      <div class="col">
+        <label class="f-label">사진 (선택)</label>
+        <div class="upload-box">📷 업로드 (선택)</div>
+        <label class="f-label">영상 링크 (선택)</label>
+        <input class="f-input" placeholder="유튜브 링크 붙여넣기">
+        <div class="hint-box">링크 입력 시: 재료·레시피 AI 자동 요약<br>링크 없을 시: 아래 직접 입력</div>
+      </div>
+      <div class="col">
+        <label class="f-label">재료 (링크 없을 때 직접 입력)</label>
+        <textarea class="f-input" style="height:44px;" placeholder="재료를 적어주세요"></textarea>
+        <label class="f-label">레시피 (링크 없을 때 직접 입력)</label>
+        <textarea class="f-input" style="height:56px;" placeholder="1. 2. 3. 순서로 적어주세요"></textarea>
+        <label class="f-label">한 줄 후기</label>
+        <textarea class="f-input" style="height:44px;" placeholder="어땠는지 적어주세요"></textarea>
+        <label class="f-label">별점 선택</label>
+        <p class="stars" style="color:var(--text-muted); margin-bottom:14px;">☆ ☆ ☆ ☆ ☆</p>
+        <button class="submit-btn">등록하기</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ Pasta Recipe 요약 조회 도구 -->
+<section class="screen" id="summary">
+  <h2>⑧ Pasta Recipe 요약 (조회 도구)</h2>
+  <p class="path">/summary</p>
+  <div class="frame">
+    <div class="back-row"><span class="arrow">&lt;</span> Pasta Recipe 요약</div>
+    <label class="f-label">유튜브 링크</label>
+    <div class="search-input-row">
+      <input class="f-input" style="margin-bottom:0;" placeholder="링크를 붙여넣으세요">
+      <button class="search-btn">요약하기</button>
+    </div>
+    <div class="block-body" style="margin-bottom:14px;">
+      <div class="result-header">
+        <span class="label">요약 결과</span>
+        <button class="copy-btn" id="copyBtn">📋 복사</button>
+      </div>
+      <p class="block" style="margin-top:0;">재료</p>
+      <p id="ingredientsText" style="font-size:12px;color:var(--text-secondary);margin:0 0 10px;">스파게티 · 마늘 · 토마토소스 · 올리브오일</p>
+      <p class="block">레시피</p>
+      <p id="stepsText" style="font-size:12px;color:var(--text-secondary);margin:0;">1. 면 삶기 2. 마늘 볶기 3. 소스 끓이기 4. 완성</p>
+    </div>
+    <button class="submit-btn">이 요약으로 후기 작성하기</button>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.peek-arrow').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var row = btn.previousElementSibling;
+      row.scrollBy({ left: row.clientWidth * 0.4, behavior: 'smooth' });
+    });
+  });
+
+  var copyBtn = document.getElementById('copyBtn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var ingredients = document.getElementById('ingredientsText').innerText;
+      var steps = document.getElementById('stepsText').innerText;
+      var text = '재료\n' + ingredients + '\n\n레시피\n' + steps;
+      navigator.clipboard.writeText(text).then(function () {
+        copyBtn.textContent = '✔ 복사됨';
+        copyBtn.classList.add('copied');
+        setTimeout(function () {
+          copyBtn.textContent = '📋 복사';
+          copyBtn.classList.remove('copied');
+        }, 1500);
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
