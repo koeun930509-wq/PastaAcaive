@@ -1,408 +1,394 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>파스타 아카이브 | 파스타 레시피 아카이빙</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              bg: "#F6F2EA",
-              surface: "#FFFFFF",
-              surface2: "#EFEAE0",
-              ink: "#1C1C1A",
-              inksub: "#7A776E",
-              inkmute: "#A6A399",
-              border: "#DEDACE",
-              borders: "#C7C2B3",
-              accent: "#FFA23B",
-              accentdark: "#8A5518",
-              accentbg: "#FFEDD3",
-            },
-            fontFamily: {
-              sans: ["Pretendard Variable", "Pretendard", "-apple-system", "sans-serif"],
-            },
-          },
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파스타 아카이브 | 파스타 레시피 아카이빙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#fcfcfc',
+          surface: '#FFFFFF',
+          surface2: '#EFEAE0',
+          ink: '#1C1C1A',
+          inksub: '#7A776E',
+          inkmute: '#A6A399',
+          border: '#DEDACE',
+          borders: '#C7C2B3',
+          accent: '#FFA23B',
+          accentdark: '#8A5518',
+          accentbg: '#FFEDD3',
         },
-      };
-    </script>
-    <style>
-      body {
-        font-family:
-          "Pretendard Variable",
-          Pretendard,
-          -apple-system,
-          sans-serif;
-      }
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-      .snap-x-row {
-        scroll-snap-type: x mandatory;
-      }
-      .snap-item {
-        scroll-snap-align: start;
-      }
-      .line-clamp-3 {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body class="bg-bg text-ink">
-    <!-- Header -->
-    <header class="sticky top-0 z-30 bg-bg/95 backdrop-blur border-b border-border">
-      <div class="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between gap-4">
-        <a href="index.html" class="shrink-0 flex items-center"
-          ><img src="assets/img/pastaAcaiveLogo_header.png" alt="Pasta Acaive" class="h-8 md:h-9 w-auto"
-        /></a>
+        fontFamily: {
+          sans: ['Pretendard Variable', 'Pretendard', '-apple-system', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .snap-x-row { scroll-snap-type: x mandatory; }
+  .snap-item { scroll-snap-align: start; }
+  .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-inksub">
-          <a href="master-list.html" class="hover:text-accentdark transition-colors">Master Review</a>
-          <a href="user-list.html" class="hover:text-accentdark transition-colors">User Review</a>
-          <a href="summary.html" class="hover:text-accentdark transition-colors">Pasta Recipe 요약</a>
-        </nav>
+  /* Mobile */
+  @media (max-width: 767px) {
 
-        <div class="flex items-center gap-3">
-          <div class="hidden sm:flex items-center gap-2 bg-surface2 border border-border rounded-full px-3 py-1.5 w-56">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-4 h-4 text-inkmute shrink-0"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="11" cy="11" r="7" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-            <input type="text" placeholder="레시피 검색" class="bg-transparent text-sm outline-none w-full placeholder:text-inkmute" />
-          </div>
-          <button class="sm:hidden w-9 h-9 flex items-center justify-center text-inksub" aria-label="검색">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="7" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
+  }
+
+  /* Tablet */
+  @media (min-width:768px) and (max-width:1199px){
+
+  }
+
+  /* Desktop */
+  @media (min-width:1200px){
+
+  }
+</style>
+</head>
+<body class="bg-bg text-ink">
+
+  <!-- Header -->
+  <header class="fixed top-0 inset-x-0 z-30 bg-[#fcfcfc]/20 backdrop-blur">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="index.html" class="shrink-0 flex items-center"><img src="assets/img/pastaAcaiveLogo_header.png" alt="Pasta Acaive" class="h-8 md:h-9 w-auto"></a>
+
+      <nav class="hidden md:flex items-center gap-8 text-[0.9rem] font-medium text-[#111]">
+        <a href="master-list.html" class="hover:text-accentdark transition-colors">Master Review</a>
+        <a href="user-list.html" class="hover:text-accentdark transition-colors">User Review</a>
+        <a href="summary.html" class="hover:text-accentdark transition-colors">Pasta Recipe 요약</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 bg-[#fcfcfc] rounded-full px-3 py-1.5 w-56">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-inkmute shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" placeholder="레시피 검색" class="bg-transparent text-sm outline-none w-full placeholder:text-inkmute">
+        </div>
+        <button class="sm:hidden w-9 h-9 flex items-center justify-center text-inksub" aria-label="검색">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+        <button class="md:hidden w-9 h-9 flex items-center justify-center text-ink" aria-label="메뉴">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden h-[71.5svh] w-full">
+    <div id="heroTrack" class="absolute inset-0 snap-x-row flex overflow-x-auto no-scrollbar">
+      <div class="snap-item relative w-full h-full shrink-0">
+        <img src="assets/img/크림파스타.jpg" alt="크림 파스타" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      </div>
+      <div class="snap-item relative w-full h-full shrink-0">
+        <img src="assets/img/토마토파스타.jpg" alt="토마토 파스타" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      </div>
+      <div class="snap-item relative w-full h-full shrink-0">
+        <img src="https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=1600&q=80" alt="오일 파스타" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      </div>
+    </div>
+
+    <div class="absolute inset-0 flex items-center w-full">
+      <div class="w-full max-w-6xl mx-auto px-4 md:px-8 flex flex-col items-start gap-4">
+        <div>
+          <p class="text-white/80 text-xs md:text-sm font-medium mb-1">자취생을 위한, 진짜 믿을 수 있는</p>
+          <h1 class="text-white text-2xl md:text-4xl font-extrabold leading-tight">파스타 레시피<br class="md:hidden"> 정리 요약</h1>
+        </div>
+        <a href="summary.html" class="inline-flex items-center gap-2 bg-[#fcfcfc]/20 border border-[#fcfcfc]/50 shadow-lg text-white font-semibold text-sm md:text-base px-5 py-3 rounded-full hover:bg-accentbg hover:text-ink transition-colors">
+          파스타 레시피 정리 요약
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-4 inset-x-0 z-10">
+      <div class="max-w-6xl mx-auto px-4 md:px-8 flex justify-center">
+        <div class="flex items-center gap-3 bg-black/30 backdrop-blur-sm rounded-full px-3 py-2 w-full sm:w-auto sm:min-w-[260px]">
+          <button id="heroPrev" aria-label="이전 슬라이드" class="shrink-0 w-6 h-6 flex items-center justify-center text-white/80 hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
           </button>
-          <button class="md:hidden w-9 h-9 flex items-center justify-center text-ink" aria-label="메뉴">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+          <div class="flex-1 flex items-center gap-1.5">
+            <span class="hero-track flex-1 h-[3px] rounded-full bg-white/30 overflow-hidden"><span class="hero-fill block h-full w-0 bg-white rounded-full"></span></span>
+            <span class="hero-track flex-1 h-[3px] rounded-full bg-white/30 overflow-hidden"><span class="hero-fill block h-full w-0 bg-white rounded-full"></span></span>
+            <span class="hero-track flex-1 h-[3px] rounded-full bg-white/30 overflow-hidden"><span class="hero-fill block h-full w-0 bg-white rounded-full"></span></span>
+          </div>
+          <button id="heroPlayPause" aria-label="일시정지" class="shrink-0 w-6 h-6 flex items-center justify-center text-white/80 hover:text-white transition-colors">
+            <svg class="hero-icon-pause w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+            <svg class="hero-icon-play w-4 h-4 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button id="heroNext" aria-label="다음 슬라이드" class="shrink-0 w-6 h-6 flex items-center justify-center text-white/80 hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
           </button>
         </div>
       </div>
-    </header>
+    </div>
+  </section>
 
-    <!-- Hero -->
-    <section class="relative overflow-hidden h-[65svh] w-full">
-      <div class="absolute inset-0 snap-x-row flex overflow-x-auto no-scrollbar">
-        <div class="snap-item relative w-full h-full shrink-0">
-          <img
-            src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=1600&q=80"
-            alt="토마토 파스타"
-            class="w-full h-full object-cover"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-        </div>
-        <div class="snap-item relative w-full h-full shrink-0">
-          <img
-            src="https://images.unsplash.com/photo-1612874742237-6526221588e3?w=1600&q=80"
-            alt="까르보나라 파스타"
-            class="w-full h-full object-cover"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-        </div>
-        <div class="snap-item relative w-full h-full shrink-0">
-          <img src="https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=1600&q=80" alt="오일 파스타" class="w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-        </div>
+  <script>
+  (function(){
+    const track = document.getElementById('heroTrack');
+    const slides = track.querySelectorAll('.snap-item');
+    const fills = document.querySelectorAll('.hero-fill');
+    const prevBtn = document.getElementById('heroPrev');
+    const nextBtn = document.getElementById('heroNext');
+    const playPauseBtn = document.getElementById('heroPlayPause');
+    const iconPause = playPauseBtn.querySelector('.hero-icon-pause');
+    const iconPlay = playPauseBtn.querySelector('.hero-icon-play');
+    const duration = 4000;
+    let current = 0;
+    let playing = true;
+    let raf = null;
+    let startTime = 0;
+    let elapsedAtPause = 0;
+
+    function applyState(){
+      fills.forEach((f, i) => {
+        f.style.transition = 'none';
+        f.style.width = (i < current ? 100 : 0) + '%';
+      });
+    }
+
+    function step(now){
+      const elapsed = now - startTime;
+      const pct = Math.min(elapsed / duration, 1);
+      fills[current].style.width = (pct * 100) + '%';
+      if (pct >= 1) {
+        goTo(current + 1);
+        return;
+      }
+      raf = requestAnimationFrame(step);
+    }
+
+    function startProgress(fromElapsed){
+      cancelAnimationFrame(raf);
+      startTime = performance.now() - (fromElapsed || 0);
+      raf = requestAnimationFrame(step);
+    }
+
+    function goTo(index){
+      current = (index + slides.length) % slides.length;
+      track.scrollTo({ left: slides[current].offsetLeft, behavior: 'smooth' });
+      applyState();
+      elapsedAtPause = 0;
+      if (playing) startProgress(0);
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    playPauseBtn.addEventListener('click', () => {
+      playing = !playing;
+      iconPause.classList.toggle('hidden', !playing);
+      iconPlay.classList.toggle('hidden', playing);
+      if (playing) {
+        startProgress(elapsedAtPause);
+      } else {
+        cancelAnimationFrame(raf);
+        elapsedAtPause = performance.now() - startTime;
+      }
+    });
+
+    applyState();
+    startProgress(0);
+  })();
+  </script>
+
+  <main class="max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-10">
+
+    <!-- 오늘의 파스타 레시피 -->
+    <section class="mb-12 md:mb-16">
+      <div class="mb-4">
+        <h2 class="text-base md:text-lg font-bold">오늘의 파스타 레시피</h2>
+        <p class="text-xs text-inkmute mt-0.5">매일 한 가지, 특별한 파스타를 추천해드려요.</p>
       </div>
-
-      <div class="absolute inset-0 flex items-center w-full">
-        <div class="w-full max-w-6xl mx-auto px-4 md:px-8 flex flex-col items-start gap-4">
-          <div>
-            <p class="text-white/80 text-xs md:text-sm font-medium mb-1">자취생을 위한, 진짜 믿을 수 있는</p>
-            <h1 class="text-white text-2xl md:text-4xl font-extrabold leading-tight">
-              파스타 레시피<br class="md:hidden" />
-              정리 요약
-            </h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-surface border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow group">
+          <div class="relative overflow-hidden aspect-[3/2]">
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80" alt="토마토 스파게티" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            <span class="absolute top-3 left-3 text-[10px] font-bold tracking-wide px-2.5 py-1 rounded-full bg-white/90 text-accentdark">TODAY'S PICK</span>
           </div>
-          <a
-            href="summary.html"
-            class="inline-flex items-center gap-2 bg-white text-ink font-semibold text-sm md:text-base px-5 py-3 rounded-full hover:bg-accentbg transition-colors"
-          >
-            파스타 레시피 정리 요약
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </a>
+          <div class="p-4 md:p-5 flex flex-col gap-2">
+            <p class="text-base md:text-lg font-bold">토마토 스파게티</p>
+            <p class="text-xs md:text-sm text-inksub leading-relaxed">상큼한 토마토소스와 향긋한 바질이 어우러진 가장 기본이지만 가장 완벽한 맛.</p>
+            <div class="flex items-center justify-between mt-1">
+              <div class="flex items-center gap-3 text-xs text-inksub">
+                <span class="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                  15분
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20v-4M12 20V10M20 20V4"/></svg>
+                  쉬움
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+                  512
+                </span>
+              </div>
+              <a href="master-detail.html" class="inline-flex items-center gap-1 text-xs font-semibold text-accentdark hover:underline w-fit">
+                레시피 보기
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="absolute bottom-4 inset-x-0">
-        <div class="max-w-6xl mx-auto px-4 md:px-8 flex justify-end">
-          <div class="flex gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
-            <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+        <div class="bg-surface border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow group">
+          <div class="relative overflow-hidden aspect-[3/2]">
+            <img src="https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=800&q=80" alt="알리오올리오" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            <span class="absolute top-3 left-3 text-[10px] font-bold tracking-wide px-2.5 py-1 rounded-full bg-white/90 text-accentdark">POPULAR</span>
+          </div>
+          <div class="p-4 md:p-5 flex flex-col gap-2">
+            <p class="text-base md:text-lg font-bold">알리오올리오</p>
+            <p class="text-xs md:text-sm text-inksub leading-relaxed">마늘과 올리브오일의 풍미를 가장 깔끔하게 즐길 수 있는 파스타.</p>
+            <div class="flex items-center justify-between mt-1">
+              <div class="flex items-center gap-3 text-xs text-inksub">
+                <span class="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                  10분
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20v-4M12 20V10M20 20V4"/></svg>
+                  쉬움
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+                  398
+                </span>
+              </div>
+              <a href="master-detail.html" class="inline-flex items-center gap-1 text-xs font-semibold text-accentdark hover:underline w-fit">
+                레시피 보기
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <main class="max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-10">
-      <!-- 오늘의 파스타 레시피 -->
-      <section class="mb-12 md:mb-16">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-base md:text-lg font-bold">오늘의 파스타 레시피</h2>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="flex bg-surface border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow group">
-            <div class="w-2/5 shrink-0 overflow-hidden aspect-[3/4]">
-              <img
-                src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=80"
-                alt="토마토 스파게티"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div class="flex-1 p-4 md:p-5 flex flex-col justify-center gap-2 min-w-0">
-              <p class="text-base md:text-lg font-bold">토마토 스파게티</p>
-              <div class="flex gap-1.5">
-                <span class="text-[11px] px-2 py-1 rounded-md bg-surface2 border border-border text-inksub">쉬움</span>
-                <span class="text-[11px] px-2 py-1 rounded-md bg-surface2 border border-border text-inksub">15분</span>
-              </div>
-              <p class="text-accentdark tracking-widest text-sm md:text-base">🍽️🍽️🍽️🍽️🍝</p>
-              <p class="text-xs text-inksub leading-relaxed line-clamp-3">
-                1. 끓는 물에 소금을 넣고 스파게티 면을 삶는다.<br />
-                2. 팬에 올리브오일과 마늘을 볶는다.<br />
-                3. 토마토소스를 넣고 끓인 뒤 면과 섞어 완성한다.
-              </p>
-              <a href="master-detail.html" class="inline-flex items-center gap-1 text-xs font-semibold text-accentdark hover:underline w-fit">
-                더보기
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </a>
-            </div>
-          </div>
-          <div class="flex bg-surface border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow group">
-            <div class="w-2/5 shrink-0 overflow-hidden aspect-[3/4]">
-              <img
-                src="https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=600&q=80"
-                alt="알리오올리오"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div class="flex-1 p-4 md:p-5 flex flex-col justify-center gap-2 min-w-0">
-              <p class="text-base md:text-lg font-bold">알리오올리오</p>
-              <div class="flex gap-1.5">
-                <span class="text-[11px] px-2 py-1 rounded-md bg-surface2 border border-border text-inksub">쉬움</span>
-                <span class="text-[11px] px-2 py-1 rounded-md bg-surface2 border border-border text-inksub">10분</span>
-              </div>
-              <p class="text-accentdark tracking-widest text-sm md:text-base">🍽️🍽️🍽️🍽️🍽️</p>
-              <p class="text-xs text-inksub leading-relaxed line-clamp-3">
-                1. 마늘을 얇게 슬라이스해 올리브오일에 약불로 볶는다.<br />
-                2. 삶은 면과 면수를 넣고 유화시킨다.<br />
-                3. 페퍼론치노와 파슬리를 더해 완성한다.
-              </p>
-              <a href="master-detail.html" class="inline-flex items-center gap-1 text-xs font-semibold text-accentdark hover:underline w-fit">
-                더보기
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Master 추천 레시피 -->
-      <section class="mb-12 md:mb-16">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-base md:text-lg font-bold">Master 추천 레시피</h2>
-          <a href="master-list.html" class="text-xs text-inkmute hover:text-accentdark">더보기 &gt;</a>
-        </div>
-        <div class="relative group/carousel">
-          <button
-            class="hidden md:flex absolute -left-4 top-1/3 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-surface border border-borders text-inksub items-center justify-center shadow-md hover:bg-accentbg hover:text-accentdark hover:border-accent transition-colors"
-            aria-label="이전"
-            onclick="this.nextElementSibling.scrollBy({ left: -this.nextElementSibling.clientWidth * 0.4, behavior: 'smooth' })"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="m15 18-6-6 6-6" />
-            </svg>
-          </button>
-          <div class="flex gap-3 overflow-x-auto no-scrollbar snap-x-row pb-1 scroll-smooth">
-            <a href="master-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
-              <div class="rounded-xl overflow-hidden border border-border mb-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=500&q=80"
-                  alt="토마토 파스타"
-                  class="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-              <p class="text-xs md:text-sm font-medium truncate">토마토 파스타</p>
-            </a>
-            <a href="master-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
-              <div class="rounded-xl overflow-hidden border border-border mb-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=500&q=80"
-                  alt="크림 파스타"
-                  class="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-              <p class="text-xs md:text-sm font-medium truncate">크림 파스타</p>
-            </a>
-            <a href="master-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
-              <div class="rounded-xl overflow-hidden border border-border mb-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=500&q=80"
-                  alt="오일 파스타"
-                  class="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-              <p class="text-xs md:text-sm font-medium truncate">오일 파스타</p>
-            </a>
-            <a href="master-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
-              <div class="rounded-xl overflow-hidden border border-border mb-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1481931098730-318b6f776db0?w=500&q=80"
-                  alt="로제 파스타"
-                  class="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-              <p class="text-xs md:text-sm font-medium truncate">로제 파스타</p>
-            </a>
-            <a href="master-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
-              <div class="rounded-xl overflow-hidden border border-border mb-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=500&q=80"
-                  alt="바질 파스타"
-                  class="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-              <p class="text-xs md:text-sm font-medium truncate">바질 파스타</p>
-            </a>
-          </div>
-          <button
-            class="absolute -right-4 top-1/3 -translate-y-1/2 z-10 w-9 h-9 md:flex rounded-full bg-surface border border-borders text-inksub flex items-center justify-center shadow-md hover:bg-accentbg hover:text-accentdark hover:border-accent transition-colors"
-            aria-label="다음"
-            onclick="this.previousElementSibling.scrollBy({ left: this.previousElementSibling.clientWidth * 0.4, behavior: 'smooth' })"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="m9 18 6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-      </section>
-
-      <!-- User 레시피 -->
-      <section class="mb-8">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-base md:text-lg font-bold">User 레시피</h2>
-          <a href="user-list.html" class="text-xs text-inkmute hover:text-accentdark">더보기 &gt;</a>
-        </div>
-        <div class="relative group/carousel">
-          <button
-            class="hidden md:flex absolute -left-4 top-1/3 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-surface border border-borders text-inksub items-center justify-center shadow-md hover:bg-accentbg hover:text-accentdark hover:border-accent transition-colors"
-            aria-label="이전"
-            onclick="this.nextElementSibling.scrollBy({ left: -this.nextElementSibling.clientWidth * 0.4, behavior: 'smooth' })"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="m15 18-6-6 6-6" />
-            </svg>
-          </button>
-          <div class="flex gap-3 overflow-x-auto no-scrollbar snap-x-row pb-1 scroll-smooth">
-            <a href="user-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
-              <div class="rounded-xl overflow-hidden border border-border mb-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=500&q=80"
-                  alt="알리오올리오"
-                  class="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-              <p class="text-xs md:text-sm font-medium truncate">알리오올리오</p>
-            </a>
-            <a href="user-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
-              <div class="rounded-xl overflow-hidden border border-border mb-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1612874742237-6526221588e3?w=500&q=80"
-                  alt="까르보나라"
-                  class="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-              <p class="text-xs md:text-sm font-medium truncate">까르보나라</p>
-            </a>
-            <a href="user-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
-              <div class="rounded-xl overflow-hidden border border-border mb-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=500&q=80"
-                  alt="명란 파스타"
-                  class="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-              <p class="text-xs md:text-sm font-medium truncate">명란 파스타</p>
-            </a>
-            <a href="user-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
-              <div class="rounded-xl overflow-hidden border border-border mb-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1595295333158-4742f28fbd85?w=500&q=80"
-                  alt="봉골레"
-                  class="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-              <p class="text-xs md:text-sm font-medium truncate">봉골레</p>
-            </a>
-            <a href="user-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
-              <div class="rounded-xl overflow-hidden border border-border mb-1.5">
-                <img
-                  src="https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=500&q=80"
-                  alt="투움바"
-                  class="w-full aspect-[3/4] object-cover"
-                />
-              </div>
-              <p class="text-xs md:text-sm font-medium truncate">투움바</p>
-            </a>
-          </div>
-          <button
-            class="absolute -right-4 top-1/3 -translate-y-1/2 z-10 w-9 h-9 md:flex rounded-full bg-surface border border-borders text-inksub flex items-center justify-center shadow-md hover:bg-accentbg hover:text-accentdark hover:border-accent transition-colors"
-            aria-label="다음"
-            onclick="this.previousElementSibling.scrollBy({ left: this.previousElementSibling.clientWidth * 0.4, behavior: 'smooth' })"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="m9 18 6-6-6-6" />
-            </svg>
-          </button>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-border mt-8">
-      <div class="max-w-6xl mx-auto px-4 md:px-8 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <p class="font-extrabold mb-1">파스타<span class="text-accent">아카이브</span></p>
-          <p class="text-xs text-inkmute">파스타 레시피 요약과 실제 후기를 한곳에서. 자취생을 위한 리얼 아카이빙.</p>
-        </div>
-        <div class="flex gap-5 text-xs text-inksub">
-          <a href="master-list.html" class="hover:text-accentdark">Master Review</a>
-          <a href="user-list.html" class="hover:text-accentdark">User Review</a>
-          <a href="summary.html" class="hover:text-accentdark">Pasta Recipe 요약</a>
-        </div>
-        <p class="text-[11px] text-inkmute">&copy; 2026 파스타아카이브. All rights reserved.</p>
+    <!-- Master 추천 레시피 -->
+    <section class="mb-12 md:mb-16">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base md:text-lg font-bold">Master 추천 레시피</h2>
+        <a href="master-list.html" class="text-xs text-inkmute hover:text-accentdark">더보기 &gt;</a>
       </div>
-    </footer>
-  </body>
+      <div class="relative group/carousel">
+        <button class="hidden md:flex absolute -left-4 top-1/3 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-surface border border-borders text-inksub items-center justify-center shadow-md hover:bg-accentbg hover:text-accentdark hover:border-accent transition-colors" aria-label="이전" onclick="this.nextElementSibling.scrollBy({left: -this.nextElementSibling.clientWidth*0.4, behavior:'smooth'})">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="flex gap-3 overflow-x-auto no-scrollbar snap-x-row pb-1 scroll-smooth">
+          <a href="master-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
+            <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+              <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=500&q=80" alt="토마토 파스타" class="w-full aspect-[3/4] object-cover">
+            </div>
+            <p class="text-xs md:text-sm font-medium truncate">토마토 파스타</p>
+          </a>
+          <a href="master-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
+            <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+              <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=500&q=80" alt="크림 파스타" class="w-full aspect-[3/4] object-cover">
+            </div>
+            <p class="text-xs md:text-sm font-medium truncate">크림 파스타</p>
+          </a>
+          <a href="master-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
+            <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+              <img src="https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=500&q=80" alt="오일 파스타" class="w-full aspect-[3/4] object-cover">
+            </div>
+            <p class="text-xs md:text-sm font-medium truncate">오일 파스타</p>
+          </a>
+          <a href="master-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
+            <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+              <img src="https://images.unsplash.com/photo-1481931098730-318b6f776db0?w=500&q=80" alt="로제 파스타" class="w-full aspect-[3/4] object-cover">
+            </div>
+            <p class="text-xs md:text-sm font-medium truncate">로제 파스타</p>
+          </a>
+          <a href="master-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
+            <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+              <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=500&q=80" alt="바질 파스타" class="w-full aspect-[3/4] object-cover">
+            </div>
+            <p class="text-xs md:text-sm font-medium truncate">바질 파스타</p>
+          </a>
+        </div>
+        <button class="absolute -right-4 top-1/3 -translate-y-1/2 z-10 w-9 h-9 md:flex rounded-full bg-surface border border-borders text-inksub flex items-center justify-center shadow-md hover:bg-accentbg hover:text-accentdark hover:border-accent transition-colors" aria-label="다음" onclick="this.previousElementSibling.scrollBy({left: this.previousElementSibling.clientWidth*0.4, behavior:'smooth'})">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- User 레시피 -->
+    <section class="mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base md:text-lg font-bold">User 레시피</h2>
+        <a href="user-list.html" class="text-xs text-inkmute hover:text-accentdark">더보기 &gt;</a>
+      </div>
+      <div class="relative group/carousel">
+        <button class="hidden md:flex absolute -left-4 top-1/3 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-surface border border-borders text-inksub items-center justify-center shadow-md hover:bg-accentbg hover:text-accentdark hover:border-accent transition-colors" aria-label="이전" onclick="this.nextElementSibling.scrollBy({left: -this.nextElementSibling.clientWidth*0.4, behavior:'smooth'})">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="flex gap-3 overflow-x-auto no-scrollbar snap-x-row pb-1 scroll-smooth">
+          <a href="user-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
+            <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+              <img src="https://images.unsplash.com/photo-1516100882582-96c3a05fe590?w=500&q=80" alt="알리오올리오" class="w-full aspect-[3/4] object-cover">
+            </div>
+            <p class="text-xs md:text-sm font-medium truncate">알리오올리오</p>
+          </a>
+          <a href="user-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
+            <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+              <img src="https://images.unsplash.com/photo-1612874742237-6526221588e3?w=500&q=80" alt="까르보나라" class="w-full aspect-[3/4] object-cover">
+            </div>
+            <p class="text-xs md:text-sm font-medium truncate">까르보나라</p>
+          </a>
+          <a href="user-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
+            <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+              <img src="https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=500&q=80" alt="명란 파스타" class="w-full aspect-[3/4] object-cover">
+            </div>
+            <p class="text-xs md:text-sm font-medium truncate">명란 파스타</p>
+          </a>
+          <a href="user-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
+            <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+              <img src="https://images.unsplash.com/photo-1595295333158-4742f28fbd85?w=500&q=80" alt="봉골레" class="w-full aspect-[3/4] object-cover">
+            </div>
+            <p class="text-xs md:text-sm font-medium truncate">봉골레</p>
+          </a>
+          <a href="user-detail.html" class="snap-item shrink-0 w-[38%] md:w-[21%]">
+            <div class="rounded-xl overflow-hidden border border-border mb-1.5">
+              <img src="https://images.unsplash.com/photo-1611270629569-8b357cb88da9?w=500&q=80" alt="투움바" class="w-full aspect-[3/4] object-cover">
+            </div>
+            <p class="text-xs md:text-sm font-medium truncate">투움바</p>
+          </a>
+        </div>
+        <button class="absolute -right-4 top-1/3 -translate-y-1/2 z-10 w-9 h-9 md:flex rounded-full bg-surface border border-borders text-inksub flex items-center justify-center shadow-md hover:bg-accentbg hover:text-accentdark hover:border-accent transition-colors" aria-label="다음" onclick="this.previousElementSibling.scrollBy({left: this.previousElementSibling.clientWidth*0.4, behavior:'smooth'})">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-border mt-8">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <p class="font-extrabold mb-1">파스타<span class="text-accent">아카이브</span></p>
+        <p class="text-xs text-inkmute">파스타 레시피 요약과 실제 후기를 한곳에서. 자취생을 위한 리얼 아카이빙.</p>
+      </div>
+      <div class="flex gap-5 text-xs text-inksub">
+        <a href="master-list.html" class="hover:text-accentdark">Master Review</a>
+        <a href="user-list.html" class="hover:text-accentdark">User Review</a>
+        <a href="summary.html" class="hover:text-accentdark">Pasta Recipe 요약</a>
+      </div>
+      <p class="text-[11px] text-inkmute">&copy; 2026 파스타아카이브. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
 </html>
