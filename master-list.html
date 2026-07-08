@@ -51,9 +51,10 @@
         <a href="master-list.html" class="text-accentdark font-semibold">Master Review</a>
         <a href="user-list.html" class="hover:text-accentdark transition-colors">User Review</a>
         <a href="summary.html" class="hover:text-accentdark transition-colors">Pasta Recipe 요약</a>
+        <a href="tips.html" class="hover:text-accentdark transition-colors">파스타 꿀팁</a>
       </nav>
       <div class="flex items-center gap-3">
-        <div class="hidden sm:flex items-center gap-2 bg-surface2 border border-border rounded-full px-3 py-1.5 w-56">
+        <div class="hidden sm:flex items-center gap-2 border border-border rounded-full px-3 py-1.5 w-56">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-inkmute shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
           <input type="text" placeholder="레시피 검색" class="bg-transparent text-sm outline-none w-full placeholder:text-inkmute">
         </div>
@@ -64,31 +65,62 @@
     </div>
   </header>
 
+  <!-- Page Banner -->
+  <section class="relative h-[220px] overflow-hidden bg-cover bg-center" style="background-image: url('assets/img/크림파스타-배너.png');">
+    <div class="relative max-w-6xl mx-auto px-4 md:px-8 h-full flex flex-col justify-center">
+      <div class="flex items-center gap-2 mb-3 text-xs text-inksub">
+        <a href="index.html" class="hover:text-accentdark">홈</a>
+        <span>&gt;</span>
+        <span class="font-medium">Master Review</span>
+      </div>
+      <h1 class="text-2xl md:text-3xl font-extrabold mb-2">Master Review</h1>
+      <p class="text-sm text-inksub max-w-md">일주일에 파스타만 3번 이상 먹는 파스타에 진심인 파스타 덕후의 리뷰</p>
+    </div>
+  </section>
+
   <main class="max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-10">
 
-    <div class="flex items-center gap-2 mb-5 text-sm">
-      <a href="index.html" class="text-inksub hover:text-accentdark">&lt;</a>
-      <h1 class="font-bold text-lg">Master Review</h1>
-    </div>
+    <!-- 카테고리 탭 + 뷰 옵션 -->
+    <div class="flex items-center justify-between gap-3 mb-5">
+      <div class="flex gap-2 overflow-x-auto no-scrollbar">
+        <button class="flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full border border-accent bg-accentbg text-accentdark font-medium whitespace-nowrap">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="7"/><path d="M12 6c.5-1.5 2-3 4-3"/><path d="M9 3.5c1 .3 1.8 1 2 2"/></svg>토마토
+        </button>
+        <button class="flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12l-1.5 16.5a2 2 0 0 1-2 1.5h-5a2 2 0 0 1-2-1.5Z"/><path d="M5 8h14"/></svg>크림
+        </button>
+        <button class="flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21c-2-3-2-6 1-9 2-2 2-4 1-6 3 1 5 4 4 7-.3 1-1 1.7-1.8 2.4"/><circle cx="12" cy="14" r="1"/></svg>오일
+        </button>
+        <button class="flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg>로제
+        </button>
+        <button class="flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9"/><path d="M12 13c0-4 3-7 7-7 0 4-3 7-7 7Z"/><path d="M12 16c0-3.5-2.5-6-6-6 0 3.5 2.5 6 6 6Z"/></svg>바질
+        </button>
+        <button class="flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>기타
+        </button>
+      </div>
 
-    <!-- 카테고리 탭 -->
-    <div class="flex gap-2 overflow-x-auto no-scrollbar mb-5">
-      <button class="text-sm px-4 py-1.5 rounded-full border border-accent bg-accentbg text-accentdark font-medium whitespace-nowrap">토마토</button>
-      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">크림</button>
-      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">오일</button>
-      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">로제</button>
-      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">바질</button>
-      <button class="text-sm px-4 py-1.5 rounded-full border border-borders text-inksub whitespace-nowrap hover:border-accent hover:text-accentdark">기타</button>
-    </div>
-
-    <!-- 뷰 토글 -->
-    <div class="flex justify-end gap-3 mb-4 text-inksub">
-      <button class="w-8 h-8 flex items-center justify-center rounded-lg bg-surface2 border border-border text-ink" aria-label="갤러리형">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      </button>
-      <button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface2 border border-transparent hover:border-border" aria-label="리스트형">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-      </button>
+      <div class="flex items-center gap-3 shrink-0 text-inksub">
+        <div class="flex items-center gap-1 bg-surface2 border border-border rounded-lg p-1">
+          <button class="w-8 h-8 flex items-center justify-center rounded-md bg-surface text-ink shadow-sm" aria-label="갤러리형">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </button>
+          <button class="w-8 h-8 flex items-center justify-center rounded-md hover:text-ink" aria-label="리스트형">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+          </button>
+        </div>
+        <div class="relative">
+          <select class="appearance-none text-sm bg-surface border border-border rounded-lg pl-3 pr-8 py-2 outline-none focus:border-accent">
+            <option>최신순</option>
+            <option>인기순</option>
+            <option>별점순</option>
+          </select>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-inkmute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+      </div>
     </div>
 
     <!-- 카드 그리드 -->
@@ -196,6 +228,7 @@
         <a href="master-list.html" class="hover:text-accentdark">Master Review</a>
         <a href="user-list.html" class="hover:text-accentdark">User Review</a>
         <a href="summary.html" class="hover:text-accentdark">Pasta Recipe 요약</a>
+        <a href="tips.html" class="hover:text-accentdark">파스타 꿀팁</a>
       </div>
       <p class="text-[11px] text-inkmute">&copy; 2026 파스타아카이브. All rights reserved.</p>
     </div>
