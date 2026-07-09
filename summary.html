@@ -42,14 +42,14 @@
 <body class="bg-bg text-ink">
 
   <!-- Header -->
-  <header class="sticky top-0 z-30 bg-bg/95 backdrop-blur border-b border-border">
-    <div class="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between gap-4">
+  <header id="siteHeader" class="sticky top-0 z-30 bg-bg/95 backdrop-blur border-b border-border">
+    <div id="headerInner" class="max-w-6xl mx-auto px-4 md:px-8 py-5 flex items-center justify-between gap-4 transition-[padding] duration-300">
       <a href="index.html" class="shrink-0 flex items-center"><img src="assets/img/newLogo.png" alt="Pasta Acaive" class="h-[2.6rem] md:h-[2.925rem] w-auto"></a>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-inksub">
-        <a href="master-list.html" class="hover:text-accentdark transition-colors">Master Review</a>
-        <a href="user-list.html" class="hover:text-accentdark transition-colors">User Review</a>
-        <a href="summary.html" class="text-accentdark font-semibold">Pasta Recipe 요약</a>
-        <a href="tips.html" class="hover:text-accentdark transition-colors">파스타 꿀팁</a>
+        <a href="master-list.html" class="hover:text-inksub transition-colors">Master Review</a>
+        <a href="user-list.html" class="hover:text-inksub transition-colors">User Review</a>
+        <a href="summary.html" class="text-inksub font-semibold">Pasta Recipe 요약</a>
+        <a href="tips.html" class="hover:text-inksub transition-colors">파스타 꿀팁</a>
       </nav>
       <div class="flex items-center gap-3">
         <div class="hidden sm:flex items-center gap-2 border border-border rounded-full px-3 py-1.5 w-56">
@@ -119,6 +119,21 @@
       <p class="text-[11px] text-inkmute">&copy; 2026 파스타아카이브. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const headerInner = document.getElementById("headerInner");
+
+      function updateHeaderPadding() {
+        const scrolled = window.scrollY > 0;
+        headerInner.classList.toggle("py-5", !scrolled);
+        headerInner.classList.toggle("py-4", scrolled);
+      }
+
+      updateHeaderPadding();
+      window.addEventListener("scroll", updateHeaderPadding, { passive: true });
+    })();
+  </script>
 
 </body>
 </html>
