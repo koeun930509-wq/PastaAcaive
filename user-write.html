@@ -20,6 +20,8 @@
     },
   };
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/js/supabase-client.js"></script>
 <style>
   body { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif; }
 
@@ -80,10 +82,10 @@
       <!-- 왼쪽: 사진(선택) + 링크(선택) -->
       <div>
         <label class="block text-sm font-bold mb-2">레시피 이름</label>
-        <input type="text" placeholder="예: 크림 파스타" class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent mb-2">
+        <input id="pastaNameInput" type="text" placeholder="예: 크림 파스타" class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent mb-2">
 
         <label class="block text-sm text-inksub mb-2 mt-4">카테고리</label>
-        <select class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent mb-5 bg-surface">
+        <select id="categorySelect" class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent mb-5 bg-surface">
           <option>토마토</option>
           <option>크림</option>
           <option>오일</option>
@@ -93,13 +95,17 @@
         </select>
 
         <label class="block text-sm font-bold mb-2">사진 <span class="text-[11px] font-normal text-inkmute">(선택)</span></label>
-        <div class="bg-surface2 border-2 border-dashed border-borders rounded-xl aspect-[3/4] flex flex-col items-center justify-center gap-2 text-inkmute mb-5 cursor-pointer hover:border-accent hover:text-accentdark transition-colors">
+        <input id="photoInput" type="file" accept="image/*" class="hidden">
+        <div id="photoDropzone" class="bg-surface2 border-2 border-dashed border-borders rounded-xl aspect-[3/4] flex flex-col items-center justify-center gap-2 text-inkmute mb-5 cursor-pointer hover:border-accent hover:text-accentdark transition-colors overflow-hidden">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
-          <span class="text-xs">업로드 (선택, 3:4 자동 크롭)</span>
+          <span id="photoDropzoneLabel" class="text-xs">업로드 (선택, 3:4 자동 크롭)</span>
         </div>
 
         <label class="block text-sm font-bold mb-2">영상 링크 <span class="text-[11px] font-normal text-inkmute">(선택)</span></label>
-        <input type="url" placeholder="유튜브 링크 붙여넣기" class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent mb-3">
+        <div class="flex gap-2 mb-3">
+          <input id="linkInput" type="url" placeholder="유튜브 링크 붙여넣기" class="flex-1 border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent">
+          <button id="summarizeBtn" type="button" class="shrink-0 border border-accent text-accentdark rounded-lg px-3.5 text-sm font-medium hover:bg-accentbg transition-colors">AI 요약</button>
+        </div>
 
         <div class="bg-accentbg text-accentdark rounded-lg px-3.5 py-3 text-[12px] leading-relaxed">
           <p>· 사진 없이 링크만 입력하면 <b>썸네일이 자동 추출</b>돼요.</p>
@@ -111,25 +117,25 @@
       <!-- 오른쪽: 재료/레시피(조건부) + 후기 -->
       <div>
         <label class="block text-sm font-bold mb-2">재료 <span class="text-[11px] font-normal text-inkmute">(링크 없을 때 직접 입력)</span></label>
-        <textarea rows="2" placeholder="재료를 적어주세요" class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent resize-none mb-5"></textarea>
+        <textarea id="ingredientsInput" rows="2" placeholder="재료를 적어주세요" class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent resize-none mb-5"></textarea>
 
         <label class="block text-sm font-bold mb-2">레시피 <span class="text-[11px] font-normal text-inkmute">(링크 없을 때 직접 입력)</span></label>
-        <textarea rows="4" placeholder="1. &#10;2. &#10;3. " class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent resize-none mb-5"></textarea>
+        <textarea id="recipeInput" rows="4" placeholder="1. &#10;2. &#10;3. " class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent resize-none mb-5"></textarea>
 
         <label class="block text-sm font-bold mb-2">한 줄 후기</label>
-        <textarea rows="2" placeholder="어땠는지 적어주세요" class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent resize-none mb-5"></textarea>
+        <textarea id="commentInput" rows="2" placeholder="어땠는지 적어주세요" class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent resize-none mb-5"></textarea>
 
         <label class="block text-sm font-bold mb-2">별점 선택</label>
-        <div class="flex items-center gap-1.5 mb-6 cursor-pointer select-none">
-          <svg class="w-6 h-6 text-border hover:text-accentdark hover:scale-110 transition-transform"><use href="#icon-star"/></svg>
-          <svg class="w-6 h-6 text-border hover:text-accentdark hover:scale-110 transition-transform"><use href="#icon-star"/></svg>
-          <svg class="w-6 h-6 text-border hover:text-accentdark hover:scale-110 transition-transform"><use href="#icon-star"/></svg>
-          <svg class="w-6 h-6 text-border hover:text-accentdark hover:scale-110 transition-transform"><use href="#icon-star"/></svg>
-          <svg class="w-6 h-6 text-border hover:text-accentdark hover:scale-110 transition-transform"><use href="#icon-star"/></svg>
-          <span class="text-xs text-inkmute ml-2">0 / 5</span>
+        <div id="starRating" class="flex items-center gap-1.5 mb-6 cursor-pointer select-none">
+          <svg data-star="1" class="w-6 h-6 text-border hover:text-accentdark hover:scale-110 transition-transform"><use href="#icon-star"/></svg>
+          <svg data-star="2" class="w-6 h-6 text-border hover:text-accentdark hover:scale-110 transition-transform"><use href="#icon-star"/></svg>
+          <svg data-star="3" class="w-6 h-6 text-border hover:text-accentdark hover:scale-110 transition-transform"><use href="#icon-star"/></svg>
+          <svg data-star="4" class="w-6 h-6 text-border hover:text-accentdark hover:scale-110 transition-transform"><use href="#icon-star"/></svg>
+          <svg data-star="5" class="w-6 h-6 text-border hover:text-accentdark hover:scale-110 transition-transform"><use href="#icon-star"/></svg>
+          <span id="starCountText" class="text-xs text-inkmute ml-2">0 / 5</span>
         </div>
 
-        <button type="button" class="w-full bg-ink text-white font-semibold rounded-lg py-3.5 text-sm hover:bg-black transition-colors">등록하기</button>
+        <button id="submitBtn" type="button" class="w-full bg-ink text-white font-semibold rounded-lg py-3.5 text-sm hover:bg-black transition-colors">등록하기</button>
       </div>
     </form>
   </main>
@@ -163,6 +169,117 @@
 
       updateHeaderPadding();
       window.addEventListener("scroll", updateHeaderPadding, { passive: true });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const stars = document.querySelectorAll("#starRating svg");
+      const starCountText = document.getElementById("starCountText");
+      let selectedStar = 0;
+
+      function renderStars() {
+        stars.forEach((star) => {
+          const filled = Number(star.dataset.star) <= selectedStar;
+          star.classList.toggle("text-accentdark", filled);
+          star.classList.toggle("text-border", !filled);
+        });
+        starCountText.textContent = `${selectedStar} / 5`;
+      }
+
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          selectedStar = Number(star.dataset.star);
+          renderStars();
+        });
+      });
+
+      const SUMMARIZE_URL = "https://wtyralabvgrxxedhqrfj.supabase.co/functions/v1/summarize-recipe";
+      const summarizeBtn = document.getElementById("summarizeBtn");
+      const linkInput = document.getElementById("linkInput");
+      const ingredientsInput = document.getElementById("ingredientsInput");
+      const recipeInput = document.getElementById("recipeInput");
+
+      summarizeBtn.addEventListener("click", async () => {
+        const link = linkInput.value.trim();
+        if (!link) {
+          alert("먼저 유튜브 링크를 입력해주세요.");
+          return;
+        }
+
+        summarizeBtn.disabled = true;
+        summarizeBtn.textContent = "요약 중...";
+
+        try {
+          const res = await fetch(SUMMARIZE_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ url: link }),
+          });
+          const data = await res.json();
+          if (data.error) throw new Error(data.error);
+
+          ingredientsInput.value = data.ingredients ?? "";
+          recipeInput.value = data.recipe ?? "";
+        } catch (err) {
+          alert("요약에 실패했습니다: " + err.message);
+        } finally {
+          summarizeBtn.disabled = false;
+          summarizeBtn.textContent = "AI 요약";
+        }
+      });
+
+      const photoInput = document.getElementById("photoInput");
+      const photoDropzone = document.getElementById("photoDropzone");
+      const photoDropzoneLabel = document.getElementById("photoDropzoneLabel");
+
+      photoDropzone.addEventListener("click", () => photoInput.click());
+      photoInput.addEventListener("change", () => {
+        const file = photoInput.files[0];
+        photoDropzoneLabel.textContent = file ? file.name : "업로드 (선택, 3:4 자동 크롭)";
+      });
+
+      const submitBtn = document.getElementById("submitBtn");
+
+      submitBtn.addEventListener("click", async () => {
+        const pastaName = document.getElementById("pastaNameInput").value.trim();
+
+        if (!pastaName) {
+          alert("레시피 이름을 입력해주세요.");
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "등록 중...";
+
+        try {
+          const file = photoInput.files[0] || null;
+          const thumbnailUrl = await uploadPastaImage(file);
+
+          const { error } = await supabaseClient.from("pasta_view").insert({
+            type: "user",
+            pasta_name: pastaName,
+            category: document.getElementById("categorySelect").value,
+            thumbnail_url: thumbnailUrl,
+            link: document.getElementById("linkInput").value.trim() || null,
+            difficulty: null,
+            time: null,
+            ingredients: document.getElementById("ingredientsInput").value.trim() || null,
+            recipe: document.getElementById("recipeInput").value.trim() || null,
+            one_line_comment: document.getElementById("commentInput").value.trim() || null,
+            star: selectedStar,
+          });
+
+          if (error) throw error;
+
+          alert("등록되었습니다.");
+          window.location.href = "user-list.html";
+        } catch (err) {
+          alert("등록에 실패했습니다: " + err.message);
+          submitBtn.disabled = false;
+          submitBtn.textContent = "등록하기";
+        }
+      });
     })();
   </script>
 
