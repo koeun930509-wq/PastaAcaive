@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관리자 로그인 | 파스타 아카이브</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              bg: "#fcfcfc",
+              surface: "#FFFFFF",
+              surface2: "#EFEAE0",
+              ink: "#1C1C1A",
+              inksub: "#7A776E",
+              inkmute: "#A6A399",
+              border: "#DEDACE",
+              borders: "#C7C2B3",
+              accent: "#FFA23B",
+              accentdark: "#8A5518",
+              accentbg: "#FFEDD3",
+            },
+            fontFamily: { sans: ["Pretendard Variable", "Pretendard", "-apple-system", "sans-serif"] },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="assets/js/supabase-client.js"></script>
+    <style>
+      body {
+        font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-bg text-ink min-h-screen flex items-center justify-center px-4">
+    <div class="w-full max-w-sm">
+      <a href="index.html" class="flex justify-center mb-8"
+        ><img src="assets/img/newLogo.png" alt="Pasta Acaive" class="h-10 w-auto"
+      /></a>
+
+      <div class="bg-surface border border-border rounded-xl p-6">
+        <h1 class="text-lg font-bold mb-5 text-center">관리자 로그인</h1>
+
+        <label class="block text-sm font-medium mb-1.5">이메일</label>
+        <input id="emailInput" type="email" class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent mb-4" />
+
+        <label class="block text-sm font-medium mb-1.5">비밀번호</label>
+        <input id="passwordInput" type="password" class="w-full border border-borders rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-accent mb-5" />
+
+        <button id="loginBtn" type="button" class="w-full bg-ink text-white font-semibold rounded-lg py-3 text-sm hover:bg-black transition-colors">
+          로그인
+        </button>
+
+        <p id="errorText" class="hidden text-xs text-red-600 mt-3 text-center"></p>
+      </div>
+    </div>
+
+    <script>
+      const emailInput = document.getElementById("emailInput");
+      const passwordInput = document.getElementById("passwordInput");
+      const loginBtn = document.getElementById("loginBtn");
+      const errorText = document.getElementById("errorText");
+
+      async function login() {
+        errorText.classList.add("hidden");
+        loginBtn.disabled = true;
+        loginBtn.textContent = "로그인 중...";
+
+        const { error } = await supabaseClient.auth.signInWithPassword({
+          email: emailInput.value.trim(),
+          password: passwordInput.value,
+        });
+
+        if (error) {
+          errorText.textContent = "로그인에 실패했습니다: " + error.message;
+          errorText.classList.remove("hidden");
+          loginBtn.disabled = false;
+          loginBtn.textContent = "로그인";
+          return;
+        }
+
+        window.location.href = "master-list.html";
+      }
+
+      loginBtn.addEventListener("click", login);
+      passwordInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") login();
+      });
+    </script>
+  </body>
+</html>

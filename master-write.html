@@ -22,6 +22,7 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/admin.js"></script>
 <style>
   body { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif; }
 
@@ -74,7 +75,7 @@
 
     <div class="flex items-center gap-2 mb-6 text-sm">
       <a href="master-list.html" class="text-inksub hover:text-accentdark">&lt;</a>
-      <span class="font-medium text-inksub">레시피 등록 (Master)</span>
+      <span id="pageTitle" class="font-medium text-inksub">레시피 등록 (Master)</span>
     </div>
 
     <form class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -96,9 +97,12 @@
 
         <label class="block text-sm font-bold mb-2">결과물 사진</label>
         <input id="photoInput" type="file" accept="image/*" class="hidden">
-        <div id="photoDropzone" class="bg-surface2 border-2 border-dashed border-borders rounded-xl aspect-[3/4] flex flex-col items-center justify-center gap-2 text-inkmute mb-1 cursor-pointer hover:border-accent hover:text-accentdark transition-colors overflow-hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
-          <span id="photoDropzoneLabel" class="text-xs">업로드 시 3:4 자동 크롭</span>
+        <div id="photoDropzone" class="relative bg-surface2 border-2 border-dashed border-borders rounded-xl aspect-[3/4] flex flex-col items-center justify-center gap-2 text-inkmute mb-1 cursor-pointer hover:border-accent hover:text-accentdark transition-colors overflow-hidden">
+          <img id="photoPreview" alt="미리보기" class="hidden absolute inset-0 w-full h-full object-cover">
+          <div id="photoDropzonePlaceholder" class="flex flex-col items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+            <span id="photoDropzoneLabel" class="text-xs">업로드 시 3:4 자동 크롭</span>
+          </div>
         </div>
         <p class="text-[11px] text-inkmute mb-5">어떤 비율로 업로드해도 자동으로 3:4 비율 중앙 크롭됩니다.</p>
 
@@ -243,14 +247,78 @@
       const photoInput = document.getElementById("photoInput");
       const photoDropzone = document.getElementById("photoDropzone");
       const photoDropzoneLabel = document.getElementById("photoDropzoneLabel");
+      const photoPreview = document.getElementById("photoPreview");
+      const photoDropzonePlaceholder = document.getElementById("photoDropzonePlaceholder");
+      let photoPreviewUrl = null;
 
       photoDropzone.addEventListener("click", () => photoInput.click());
       photoInput.addEventListener("change", () => {
         const file = photoInput.files[0];
+
+        if (photoPreviewUrl) {
+          URL.revokeObjectURL(photoPreviewUrl);
+          photoPreviewUrl = null;
+        }
+
+        if (file) {
+          photoPreviewUrl = URL.createObjectURL(file);
+          photoPreview.src = photoPreviewUrl;
+          photoPreview.classList.remove("hidden");
+          photoDropzonePlaceholder.classList.add("hidden");
+        } else {
+          photoPreview.classList.add("hidden");
+          photoDropzonePlaceholder.classList.remove("hidden");
+        }
+
         photoDropzoneLabel.textContent = file ? file.name : "업로드 시 3:4 자동 크롭";
       });
 
       const submitBtn = document.getElementById("submitBtn");
+      const pageTitle = document.getElementById("pageTitle");
+
+      let editId = null;
+      let existingThumbnailUrl = null;
+
+      async function initEditMode() {
+        const id = new URLSearchParams(window.location.search).get("id");
+        if (!id) return;
+
+        if (!(await isAdminLoggedIn())) {
+          alert("수정하려면 관리자 로그인이 필요합니다.");
+          window.location.href = "admin-login.html";
+          return;
+        }
+
+        const { data, error } = await supabaseClient.from("pasta_view").select("*").eq("id", id).single();
+        if (error || !data) {
+          alert("글을 찾을 수 없습니다.");
+          window.location.href = "master-list.html";
+          return;
+        }
+
+        editId = id;
+        document.getElementById("pastaNameInput").value = data.pasta_name || "";
+        document.getElementById("categorySelect").value = data.category || "토마토";
+        document.getElementById("difficultySelect").value = data.difficulty || "쉬움";
+        document.getElementById("timeInput").value = data.time || "";
+        linkInput.value = data.link || "";
+        ingredientsInput.value = data.ingredients || "";
+        recipeInput.value = data.recipe || "";
+        document.getElementById("commentInput").value = data.one_line_comment || "";
+
+        selectedStar = data.star || 0;
+        renderStars();
+
+        existingThumbnailUrl = data.thumbnail_url || null;
+        if (existingThumbnailUrl) {
+          photoPreview.src = existingThumbnailUrl;
+          photoPreview.classList.remove("hidden");
+          photoDropzonePlaceholder.classList.add("hidden");
+        }
+
+        pageTitle.textContent = "레시피 수정 (Master)";
+        submitBtn.textContent = "수정하기";
+      }
 
       submitBtn.addEventListener("click", async () => {
         const pastaName = document.getElementById("pastaNameInput").value.trim();
@@ -262,13 +330,13 @@
         }
 
         submitBtn.disabled = true;
-        submitBtn.textContent = "등록 중...";
+        submitBtn.textContent = editId ? "수정 중..." : "등록 중...";
 
         try {
           const file = photoInput.files[0] || null;
-          const thumbnailUrl = await uploadPastaImage(file);
+          const thumbnailUrl = file ? await uploadPastaImage(file) : existingThumbnailUrl;
 
-          const { error } = await supabaseClient.from("pasta_view").insert({
+          const payload = {
             type: "master",
             pasta_name: pastaName,
             category: document.getElementById("categorySelect").value,
@@ -280,18 +348,24 @@
             recipe: document.getElementById("recipeInput").value.trim() || null,
             one_line_comment: document.getElementById("commentInput").value.trim() || null,
             star: selectedStar,
-          });
+          };
+
+          const { error } = editId
+            ? await supabaseClient.from("pasta_view").update(payload).eq("id", editId)
+            : await supabaseClient.from("pasta_view").insert(payload);
 
           if (error) throw error;
 
-          alert("등록되었습니다.");
+          alert(editId ? "수정되었습니다." : "등록되었습니다.");
           window.location.href = "master-list.html";
         } catch (err) {
-          alert("등록에 실패했습니다: " + err.message);
+          alert((editId ? "수정에 실패했습니다: " : "등록에 실패했습니다: ") + err.message);
           submitBtn.disabled = false;
-          submitBtn.textContent = "등록하기";
+          submitBtn.textContent = editId ? "수정하기" : "등록하기";
         }
       });
+
+      initEditMode();
     })();
   </script>
 
