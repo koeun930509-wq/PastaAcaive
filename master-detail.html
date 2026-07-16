@@ -103,53 +103,84 @@
       </div>
     </header>
 
-    <!-- Page Banner -->
-    <section class="relative h-[220px] overflow-hidden bg-cover bg-center" style="background-image: url(&quot;assets/img/크림파스타-배너.png&quot;)">
-      <div class="relative max-w-6xl mx-auto px-4 md:px-8 h-full flex flex-col justify-center">
-        <div class="flex items-center gap-2 mb-3 text-xs text-inksub">
-          <a href="index.html" class="hover:text-accentdark">홈</a>
-          <span>&gt;</span>
-          <span class="font-medium">Master Review</span>
-        </div>
-        <h1 class="text-2xl md:text-3xl font-extrabold mb-2">Master Review</h1>
-        <p class="text-sm text-inksub max-w-md">일주일에 파스타만 3번 이상 먹는 파스타에 진심인 파스타 덕후의 리뷰</p>
-      </div>
-    </section>
+    <main class="max-w-6xl mx-auto px-4 md:px-8 py-8 md:py-12">
+      <h1 id="detailTitle" class="text-2xl md:text-3xl font-extrabold mb-6">불러오는 중...</h1>
 
-    <main class="max-w-5xl mx-auto px-4 md:px-8 py-6 md:py-10">
-      <h2 id="detailTitle" class="text-2xl md:text-3xl font-extrabold mb-6">불러오는 중...</h2>
       <div id="detailContent" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-        <!-- 왼쪽: 사진 + 링크 -->
-        <div>
-          <div class="rounded-2xl overflow-hidden border border-border mb-3">
-            <img id="detailImage" src="assets/img/크림파스타-배너.png" alt="완성 사진" class="w-full aspect-[3/4] object-cover" />
-          </div>
-          <a
-            id="detailLinkWrap"
-            href="#"
-            target="_blank"
-            class="hidden items-center gap-2 border border-borders rounded-lg px-3 py-2.5 text-sm text-inksub hover:border-accent hover:text-accentdark transition-colors"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-            </svg>
-            원본 영상 링크 보기
-          </a>
+        <!-- 왼쪽: 사진 -->
+        <div class="self-start rounded-2xl overflow-hidden border border-border">
+          <img id="detailImage" src="assets/img/크림파스타-배너.png" alt="완성 사진" class="w-full aspect-[4/5] object-cover" />
         </div>
 
         <!-- 오른쪽: 정보 -->
         <div>
-          <div class="flex gap-2 mb-5">
-            <span id="detailDifficulty" class="text-xs px-3 py-1.5 rounded-lg bg-surface2 border border-border font-medium"></span>
-            <span id="detailTime" class="text-xs px-3 py-1.5 rounded-lg bg-surface2 border border-border font-medium"></span>
+          <!-- 원본 링크 -->
+          <a
+            id="detailLinkWrap"
+            href="#"
+            target="_blank"
+            class="hidden items-center gap-2.5 border border-border rounded-xl px-4 py-3 text-sm text-inksub hover:bg-[#DEDACE]/30 hover:text-accentdark transition-colors mb-4"
+          >
+            <span class="shrink-0 w-7 h-7 rounded-full border border-border flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-ink" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </span>
+            <span id="detailLinkText" class="truncate"></span>
+          </a>
+
+          <!-- 소요시간 / 난이도 / 파스타 종류 -->
+          <div class="grid grid-cols-3 gap-3 mb-6">
+            <div class="bg-[#fcfbf9] border border-border rounded-xl py-4 px-2 text-center">
+              <p class="flex items-center justify-center gap-1 text-xs text-inksub mb-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 3" />
+                </svg>
+                소요시간
+              </p>
+              <p id="detailTime" class="text-base font-bold"></p>
+            </div>
+            <div class="bg-[#fcfbf9] border border-border rounded-xl py-4 px-2 text-center">
+              <p class="flex items-center justify-center gap-1 text-xs text-inksub mb-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 20V10M10 20V4M16 20v-7" />
+                </svg>
+                난이도
+              </p>
+              <p id="detailDifficulty" class="text-base font-bold"></p>
+            </div>
+            <div class="bg-[#fcfbf9] border border-border rounded-xl py-4 px-2 text-center">
+              <p class="flex items-center justify-center gap-1 text-xs text-inksub mb-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 3h12l-1.5 16.5a2 2 0 0 1-2 1.5h-5a2 2 0 0 1-2-1.5Z" />
+                  <path d="M5 8h14" />
+                </svg>
+                파스타 종류
+              </p>
+              <p id="detailCategory" class="text-base font-bold"></p>
+            </div>
           </div>
 
-          <h2 class="text-sm font-bold mb-2">재료</h2>
-          <div id="detailIngredients" class="bg-surface2 border border-border rounded-lg p-3.5 text-sm text-inksub leading-relaxed mb-5"></div>
+          <!-- 재료 -->
+          <div class="flex items-center gap-1.5 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 9h16l-1.5 9.5A2 2 0 0 1 16.53 20H7.47a2 2 0 0 1-1.97-1.5Z" />
+              <path d="M8 9V7a4 4 0 0 1 8 0v2" />
+            </svg>
+            <h2 class="text-[1.2rem] font-bold">재료</h2>
+          </div>
+          <div id="detailIngredients" class="bg-[#fcfbf9] border border-border rounded-xl p-4 text-sm text-inksub leading-relaxed mb-6"></div>
 
-          <h2 class="text-sm font-bold mb-2">레시피</h2>
-          <div id="detailRecipe" class="bg-surface2 border border-border rounded-lg p-3.5 text-sm text-inksub leading-loose mb-6"></div>
+          <!-- 레시피 -->
+          <div class="flex items-center gap-1.5 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
+              <line x1="6" y1="17" x2="18" y2="17" />
+            </svg>
+            <h2 class="text-[1.2rem] font-bold">레시피</h2>
+          </div>
+          <div id="detailRecipe" class="bg-[#fcfbf9] border border-border rounded-xl p-4 text-sm text-inksub leading-loose mb-6"></div>
 
           <!-- 후기 + 별점 -->
           <div class="border-t border-border pt-4 mb-2">
@@ -159,7 +190,7 @@
 
           <!-- 한줄의견(댓글) -->
           <div class="border-t border-border pt-4 mt-4">
-            <p class="text-sm font-bold mb-3">한줄의견</p>
+            <p class="text-[1.2rem] font-bold mb-3">한줄의견</p>
             <p class="text-sm text-inkmute">댓글 기능은 준비 중입니다.</p>
           </div>
         </div>
@@ -220,12 +251,14 @@
         const linkWrap = document.getElementById("detailLinkWrap");
         if (data.link) {
           linkWrap.href = data.link;
+          document.getElementById("detailLinkText").textContent = data.link;
           linkWrap.classList.remove("hidden");
           linkWrap.classList.add("flex");
         }
 
-        document.getElementById("detailDifficulty").textContent = data.difficulty || "";
-        document.getElementById("detailTime").textContent = data.time || "";
+        document.getElementById("detailDifficulty").textContent = data.difficulty || "-";
+        document.getElementById("detailTime").textContent = data.time || "-";
+        document.getElementById("detailCategory").textContent = data.category || "-";
         document.getElementById("detailIngredients").textContent = data.ingredients || "등록된 재료가 없습니다.";
         document.getElementById("detailRecipe").innerHTML = (data.recipe || "등록된 레시피가 없습니다.").replace(/\n/g, "<br />");
         document.getElementById("detailComment").textContent = data.one_line_comment ? `"${data.one_line_comment}"` : "";
